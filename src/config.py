@@ -31,6 +31,21 @@ INDICATEURS = {"masse_monetaire_senegal": {
         "series_code": "KKKSR1015A0BP",
         "description": "PIB nominal, Sénégal",
     },
+    "secteur_agriculture_senegal": {
+        "dataset_code": "PIBN",
+        "series_code": "KKKSR1038A0BP",
+        "description": "PIB - Agriculture, élevage, sylviculture, pêche, Sénégal",
+    },
+    "secteur_industrie_senegal": {
+        "dataset_code": "PIBN",
+        "series_code": "KKKSR1039A0BP",
+        "description": "PIB - Industrie, mines, énergie, BTP, Sénégal",
+    },
+    "secteur_services_senegal": {
+        "dataset_code": "PIBN",
+        "series_code": "KKKSR1040A0BP",
+        "description": "PIB - Services, Sénégal",
+    },
 }
 
 PROVIDER = "BCEAO"
