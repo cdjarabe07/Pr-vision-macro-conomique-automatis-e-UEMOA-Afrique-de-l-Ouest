@@ -1,7 +1,21 @@
 # Ce fichier centralise tous les indicateurs qu'on veut suivre.
 # Si on veut ajouter un indicateur plus tard, on l'ajoute ici, nulle part ailleurs.
 
-INDICATEURS = {
+INDICATEURS = {"masse_monetaire_senegal": {
+        "dataset_code": "AM_A",
+        "series_code": "KKKSF1412A0AP",
+        "description": "Masse monétaire (M2), Sénégal",
+    },
+    "reserves_change_senegal": {
+        "dataset_code": "AEN_A",
+        "series_code": "KKKSF1532A0AP",
+        "description": "Réserves de change (actifs extérieurs nets), Sénégal",
+    },
+    "balance_commerciale_senegal": {
+        "dataset_code": "BDP4",
+        "series_code": "KKKSE1010A0AP",
+        "description": "Balance commerciale, Sénégal",
+    },
     "inflation_senegal": {
         "dataset_code": "TAUXINFL_A",
         "series_code": "KKKSR3072A0BP",
