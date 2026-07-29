@@ -7,9 +7,9 @@ INDICATEURS = {"masse_monetaire_senegal": {
         "description": "Masse monétaire (M2), Sénégal",
     },
     "reserves_change_senegal": {
-        "dataset_code": "AEN_A",
-        "series_code": "KKKSF1532A0AP",
-        "description": "Réserves de change (actifs extérieurs nets), Sénégal",
+        "dataset_code": "SIM",
+        "series_code": "KKKSF1253A0AP",
+        "description": "Réserves de change (avoirs extérieurs nets), Sénégal — historique jusqu'en 2015, non actualisé depuis",
     },
     "balance_commerciale_senegal": {
         "dataset_code": "BDP4",
