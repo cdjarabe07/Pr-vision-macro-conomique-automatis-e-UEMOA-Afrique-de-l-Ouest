@@ -1,0 +1,407 @@
+pays,indicateur,annee,valeur
+Sénégal,pib,1960-01-01,150.7
+Sénégal,pib,1961-01-01,162.6
+Sénégal,pib,1962-01-01,172.2
+Sénégal,pib,1963-01-01,179.3
+Sénégal,pib,1964-01-01,190.8
+Sénégal,pib,1965-01-01,199.7
+Sénégal,pib,1966-01-01,206.3
+Sénégal,pib,1967-01-01,206.5
+Sénégal,pib,1968-01-01,218.3
+Sénégal,pib,1969-01-01,218.0
+Sénégal,pib,1970-01-01,241.5
+Sénégal,pib,1971-01-01,248.4
+Sénégal,pib,1972-01-01,275.1
+Sénégal,pib,1973-01-01,279.7
+Sénégal,pib,1974-01-01,340.3
+Sénégal,pib,1975-01-01,408.5
+Sénégal,pib,1976-01-01,461.8
+Sénégal,pib,1977-01-01,486.1
+Sénégal,pib,1978-01-01,498.5
+Sénégal,pib,1979-01-01,585.2
+Sénégal,pib,1980-01-01,631.0
+Sénégal,pib,1981-01-01,673.6
+Sénégal,pib,1982-01-01,848.9
+Sénégal,pib,1983-01-01,944.9
+Sénégal,pib,1984-01-01,1021.2
+Sénégal,pib,1985-01-01,1158.5
+Sénégal,pib,1986-01-01,1303.3
+Sénégal,pib,1987-01-01,1382.3
+Sénégal,pib,1988-01-01,1483.3
+Sénégal,pib,1989-01-01,1475.9
+Sénégal,pib,1990-01-01,2139.32
+Sénégal,pib,1991-01-01,2153.88
+Sénégal,pib,1992-01-01,2214.22
+Sénégal,pib,1993-01-01,2134.55
+Sénégal,pib,1994-01-01,2615.63
+Sénégal,pib,1995-01-01,3010.45
+Sénégal,pib,1996-01-01,3295.45
+Sénégal,pib,1997-01-01,3519.44
+Sénégal,pib,1998-01-01,3810.05
+Sénégal,pib,1999-01-01,4057.71
+Sénégal,pib,2000-01-01,4270.61
+Sénégal,pib,2001-01-01,4766.32
+Sénégal,pib,2002-01-01,4860.43
+Sénégal,pib,2003-01-01,5084.96
+Sénégal,pib,2004-01-01,5313.89
+Sénégal,pib,2005-01-01,5804.6
+Sénégal,pib,2006-01-01,6111.29
+Sénégal,pib,2007-01-01,6698.1
+Sénégal,pib,2008-01-01,7516.88
+Sénégal,pib,2009-01-01,7593.3
+Sénégal,pib,2010-01-01,7976.73
+Sénégal,pib,2011-01-01,8394.96
+Sénégal,pib,2012-01-01,9016.87
+Sénégal,pib,2013-01-01,9343.92
+Sénégal,pib,2014-01-01,9775.04
+Sénégal,pib,2015-01-01,10508.65
+Sénégal,pib,2016-01-01,11283.4
+Sénégal,pib,2017-01-01,12191.8
+Sénégal,pib,2018-01-01,12840.1
+Sénégal,pib,2019-01-01,13712.7
+Sénégal,pib,2020-01-01,14119.4
+Sénégal,pib,2021-01-01,15261.12
+Sénégal,pib,2022-01-01,17227.9
+Sénégal,pib,2023-01-01,18711.7
+Sénégal,pib,2024-01-01,20365.6
+Sénégal,inflation,1960-01-01,
+Sénégal,inflation,1961-01-01,
+Sénégal,inflation,1962-01-01,
+Sénégal,inflation,1963-01-01,
+Sénégal,inflation,1964-01-01,
+Sénégal,inflation,1965-01-01,
+Sénégal,inflation,1966-01-01,
+Sénégal,inflation,1967-01-01,
+Sénégal,inflation,1968-01-01,
+Sénégal,inflation,1969-01-01,
+Sénégal,inflation,1970-01-01,
+Sénégal,inflation,1971-01-01,
+Sénégal,inflation,1972-01-01,
+Sénégal,inflation,1973-01-01,
+Sénégal,inflation,1974-01-01,
+Sénégal,inflation,1975-01-01,
+Sénégal,inflation,1976-01-01,
+Sénégal,inflation,1977-01-01,
+Sénégal,inflation,1978-01-01,
+Sénégal,inflation,1979-01-01,
+Sénégal,inflation,1980-01-01,
+Sénégal,inflation,1981-01-01,
+Sénégal,inflation,1982-01-01,
+Sénégal,inflation,1983-01-01,
+Sénégal,inflation,1984-01-01,
+Sénégal,inflation,1985-01-01,
+Sénégal,inflation,1986-01-01,
+Sénégal,inflation,1987-01-01,
+Sénégal,inflation,1988-01-01,
+Sénégal,inflation,1989-01-01,
+Sénégal,inflation,1990-01-01,
+Sénégal,inflation,1991-01-01,
+Sénégal,inflation,1992-01-01,
+Sénégal,inflation,1993-01-01,
+Sénégal,inflation,1994-01-01,
+Sénégal,inflation,1995-01-01,
+Sénégal,inflation,1996-01-01,
+Sénégal,inflation,1997-01-01,
+Sénégal,inflation,1998-01-01,1.16
+Sénégal,inflation,1999-01-01,0.81
+Sénégal,inflation,2000-01-01,0.74
+Sénégal,inflation,2001-01-01,2.98
+Sénégal,inflation,2002-01-01,2.34
+Sénégal,inflation,2003-01-01,-0.03
+Sénégal,inflation,2004-01-01,0.5
+Sénégal,inflation,2005-01-01,1.71
+Sénégal,inflation,2006-01-01,2.12
+Sénégal,inflation,2007-01-01,5.86
+Sénégal,inflation,2008-01-01,5.76
+Sénégal,inflation,2009-01-01,-2.25
+Sénégal,inflation,2010-01-01,1.2
+Sénégal,inflation,2011-01-01,3.4
+Sénégal,inflation,2012-01-01,1.4
+Sénégal,inflation,2013-01-01,0.7
+Sénégal,inflation,2014-01-01,-1.1
+Sénégal,inflation,2015-01-01,0.2
+Sénégal,inflation,2016-01-01,0.8
+Sénégal,inflation,2017-01-01,2.2
+Sénégal,inflation,2018-01-01,0.5
+Sénégal,inflation,2019-01-01,1.0
+Sénégal,inflation,2020-01-01,2.5
+Sénégal,inflation,2021-01-01,2.2
+Sénégal,inflation,2022-01-01,9.7
+Sénégal,inflation,2023-01-01,5.9
+Sénégal,inflation,2024-01-01,0.8
+Côte d'Ivoire,pib,1960-01-01,140.7
+Côte d'Ivoire,pib,1961-01-01,159.3
+Côte d'Ivoire,pib,1962-01-01,166.1
+Côte d'Ivoire,pib,1963-01-01,195.9
+Côte d'Ivoire,pib,1964-01-01,237.1
+Côte d'Ivoire,pib,1965-01-01,236.8
+Côte d'Ivoire,pib,1966-01-01,236.8
+Côte d'Ivoire,pib,1967-01-01,257.3
+Côte d'Ivoire,pib,1968-01-01,274.4
+Côte d'Ivoire,pib,1969-01-01,325.1
+Côte d'Ivoire,pib,1970-01-01,364.0
+Côte d'Ivoire,pib,1971-01-01,414.0
+Côte d'Ivoire,pib,1972-01-01,439.3
+Côte d'Ivoire,pib,1973-01-01,471.6
+Côte d'Ivoire,pib,1974-01-01,559.1
+Côte d'Ivoire,pib,1975-01-01,566.2
+Côte d'Ivoire,pib,1976-01-01,739.0
+Côte d'Ivoire,pib,1977-01-01,834.5
+Côte d'Ivoire,pib,1978-01-01,939.9
+Côte d'Ivoire,pib,1979-01-01,1539.2
+Côte d'Ivoire,pib,1980-01-01,1782.8
+Côte d'Ivoire,pib,1981-01-01,1944.9
+Côte d'Ivoire,pib,1982-01-01,2149.9
+Côte d'Ivoire,pib,1983-01-01,2291.4
+Côte d'Ivoire,pib,1984-01-01,2486.6
+Côte d'Ivoire,pib,1985-01-01,3135.0
+Côte d'Ivoire,pib,1986-01-01,3172.0
+Côte d'Ivoire,pib,1987-01-01,3031.8
+Côte d'Ivoire,pib,1988-01-01,3054.5
+Côte d'Ivoire,pib,1989-01-01,3109.5
+Côte d'Ivoire,pib,1990-01-01,3725.61
+Côte d'Ivoire,pib,1991-01-01,4089.15
+Côte d'Ivoire,pib,1992-01-01,4076.32
+Côte d'Ivoire,pib,1993-01-01,4073.26
+Côte d'Ivoire,pib,1994-01-01,5883.59
+Côte d'Ivoire,pib,1995-01-01,7558.21
+Côte d'Ivoire,pib,1996-01-01,8584.26
+Côte d'Ivoire,pib,1997-01-01,9457.93
+Côte d'Ivoire,pib,1998-01-01,10285.48
+Côte d'Ivoire,pib,1999-01-01,10533.97
+Côte d'Ivoire,pib,2000-01-01,10547.73
+Côte d'Ivoire,pib,2001-01-01,11341.65
+Côte d'Ivoire,pib,2002-01-01,11896.02
+Côte d'Ivoire,pib,2003-01-01,12297.64
+Côte d'Ivoire,pib,2004-01-01,12089.31
+Côte d'Ivoire,pib,2005-01-01,12456.78
+Côte d'Ivoire,pib,2006-01-01,12866.77
+Côte d'Ivoire,pib,2007-01-01,13477.74
+Côte d'Ivoire,pib,2008-01-01,14994.95
+Côte d'Ivoire,pib,2009-01-01,15845.23
+Côte d'Ivoire,pib,2010-01-01,17035.94
+Côte d'Ivoire,pib,2011-01-01,16743.15
+Côte d'Ivoire,pib,2012-01-01,18907.19
+Côte d'Ivoire,pib,2013-01-01,21351.39
+Côte d'Ivoire,pib,2014-01-01,24137.13
+Côte d'Ivoire,pib,2015-01-01,27086.37
+Côte d'Ivoire,pib,2016-01-01,28686.7
+Côte d'Ivoire,pib,2017-01-01,30491.6
+Côte d'Ivoire,pib,2018-01-01,32506.1
+Côte d'Ivoire,pib,2019-01-01,35379.0
+Côte d'Ivoire,pib,2020-01-01,36278.0
+Côte d'Ivoire,pib,2021-01-01,40366.86
+Côte d'Ivoire,pib,2022-01-01,43771.2
+Côte d'Ivoire,pib,2023-01-01,47790.9
+Côte d'Ivoire,pib,2024-01-01,52400.0
+Côte d'Ivoire,inflation,1998-01-01,4.6
+Côte d'Ivoire,inflation,1999-01-01,0.7
+Côte d'Ivoire,inflation,2000-01-01,2.54
+Côte d'Ivoire,inflation,2001-01-01,4.35
+Côte d'Ivoire,inflation,2002-01-01,3.08
+Côte d'Ivoire,inflation,2003-01-01,3.3
+Côte d'Ivoire,inflation,2004-01-01,1.45
+Côte d'Ivoire,inflation,2005-01-01,3.89
+Côte d'Ivoire,inflation,2006-01-01,2.47
+Côte d'Ivoire,inflation,2007-01-01,1.89
+Côte d'Ivoire,inflation,2008-01-01,6.31
+Côte d'Ivoire,inflation,2009-01-01,0.52
+Côte d'Ivoire,inflation,2010-01-01,1.8
+Côte d'Ivoire,inflation,2011-01-01,4.9
+Côte d'Ivoire,inflation,2012-01-01,1.3
+Côte d'Ivoire,inflation,2013-01-01,2.6
+Côte d'Ivoire,inflation,2014-01-01,0.5
+Côte d'Ivoire,inflation,2015-01-01,1.2
+Côte d'Ivoire,inflation,2016-01-01,0.7
+Côte d'Ivoire,inflation,2017-01-01,0.4
+Côte d'Ivoire,inflation,2018-01-01,0.6
+Côte d'Ivoire,inflation,2019-01-01,0.8
+Côte d'Ivoire,inflation,2020-01-01,2.4
+Côte d'Ivoire,inflation,2021-01-01,4.2
+Côte d'Ivoire,inflation,2022-01-01,5.2
+Côte d'Ivoire,inflation,2023-01-01,4.4
+Côte d'Ivoire,inflation,2024-01-01,3.5
+Burkina Faso,pib,1960-01-01,57.7
+Burkina Faso,pib,1961-01-01,61.2
+Burkina Faso,pib,1962-01-01,65.0
+Burkina Faso,pib,1963-01-01,67.1
+Burkina Faso,pib,1964-01-01,69.2
+Burkina Faso,pib,1965-01-01,70.1
+Burkina Faso,pib,1966-01-01,71.4
+Burkina Faso,pib,1967-01-01,69.9
+Burkina Faso,pib,1968-01-01,80.9
+Burkina Faso,pib,1969-01-01,81.7
+Burkina Faso,pib,1970-01-01,90.4
+Burkina Faso,pib,1971-01-01,99.6
+Burkina Faso,pib,1972-01-01,99.5
+Burkina Faso,pib,1973-01-01,97.5
+Burkina Faso,pib,1974-01-01,109.6
+Burkina Faso,pib,1975-01-01,117.6
+Burkina Faso,pib,1976-01-01,147.2
+Burkina Faso,pib,1977-01-01,159.3
+Burkina Faso,pib,1978-01-01,222.5
+Burkina Faso,pib,1979-01-01,252.5
+Burkina Faso,pib,1980-01-01,272.1
+Burkina Faso,pib,1981-01-01,324.6
+Burkina Faso,pib,1982-01-01,356.6
+Burkina Faso,pib,1983-01-01,381.0
+Burkina Faso,pib,1984-01-01,390.6
+Burkina Faso,pib,1985-01-01,663.1
+Burkina Faso,pib,1986-01-01,666.4
+Burkina Faso,pib,1987-01-01,667.9
+Burkina Faso,pib,1988-01-01,728.7
+Burkina Faso,pib,1989-01-01,777.8
+Burkina Faso,pib,1990-01-01,949.67
+Burkina Faso,pib,1991-01-01,994.77
+Burkina Faso,pib,1992-01-01,999.19
+Burkina Faso,pib,1993-01-01,1019.12
+Burkina Faso,pib,1994-01-01,1183.58
+Burkina Faso,pib,1995-01-01,1335.97
+Burkina Faso,pib,1996-01-01,1488.09
+Burkina Faso,pib,1997-01-01,1606.83
+Burkina Faso,pib,1998-01-01,1861.16
+Burkina Faso,pib,1999-01-01,2086.19
+Burkina Faso,pib,2000-01-01,2108.16
+Burkina Faso,pib,2001-01-01,2336.62
+Burkina Faso,pib,2002-01-01,2512.87
+Burkina Faso,pib,2003-01-01,2749.16
+Burkina Faso,pib,2004-01-01,2874.88
+Burkina Faso,pib,2005-01-01,3240.72
+Burkina Faso,pib,2006-01-01,3420.54
+Burkina Faso,pib,2007-01-01,3649.93
+Burkina Faso,pib,2008-01-01,4215.34
+Burkina Faso,pib,2009-01-01,4444.6
+Burkina Faso,pib,2010-01-01,5002.18
+Burkina Faso,pib,2011-01-01,5692.82
+Burkina Faso,pib,2012-01-01,6413.11
+Burkina Faso,pib,2013-01-01,6640.14
+Burkina Faso,pib,2014-01-01,6884.47
+Burkina Faso,pib,2015-01-01,6995.31
+Burkina Faso,pib,2016-01-01,7605.1
+Burkina Faso,pib,2017-01-01,8191.3
+Burkina Faso,pib,2018-01-01,8826.1
+Burkina Faso,pib,2019-01-01,9393.8
+Burkina Faso,pib,2020-01-01,10202.3
+Burkina Faso,pib,2021-01-01,10922.88
+Burkina Faso,pib,2022-01-01,11876.3
+Burkina Faso,pib,2023-01-01,12490.2
+Burkina Faso,pib,2024-01-01,13689.9
+Burkina Faso,inflation,1998-01-01,4.91
+Burkina Faso,inflation,1999-01-01,-1.08
+Burkina Faso,inflation,2000-01-01,-0.17
+Burkina Faso,inflation,2001-01-01,4.73
+Burkina Faso,inflation,2002-01-01,2.3
+Burkina Faso,inflation,2003-01-01,2.04
+Burkina Faso,inflation,2004-01-01,-0.4
+Burkina Faso,inflation,2005-01-01,6.41
+Burkina Faso,inflation,2006-01-01,2.34
+Burkina Faso,inflation,2007-01-01,-0.23
+Burkina Faso,inflation,2008-01-01,10.67
+Burkina Faso,inflation,2009-01-01,0.86
+Burkina Faso,inflation,2010-01-01,-0.6
+Burkina Faso,inflation,2011-01-01,2.8
+Burkina Faso,inflation,2012-01-01,3.8
+Burkina Faso,inflation,2013-01-01,0.5
+Burkina Faso,inflation,2014-01-01,-0.3
+Burkina Faso,inflation,2015-01-01,0.9
+Burkina Faso,inflation,2016-01-01,-0.2
+Burkina Faso,inflation,2017-01-01,2.9
+Burkina Faso,inflation,2018-01-01,1.9
+Burkina Faso,inflation,2019-01-01,-3.2
+Burkina Faso,inflation,2020-01-01,1.9
+Burkina Faso,inflation,2021-01-01,3.9
+Burkina Faso,inflation,2022-01-01,14.1
+Burkina Faso,inflation,2023-01-01,0.7
+Burkina Faso,inflation,2024-01-01,4.2
+Mali,pib,1960-01-01,68.0
+Mali,pib,1961-01-01,72.0
+Mali,pib,1962-01-01,90.4
+Mali,pib,1963-01-01,94.6
+Mali,pib,1964-01-01,103.8
+Mali,pib,1965-01-01,65.3
+Mali,pib,1966-01-01,67.8
+Mali,pib,1967-01-01,76.3
+Mali,pib,1968-01-01,83.5
+Mali,pib,1969-01-01,94.1
+Mali,pib,1970-01-01,96.4
+Mali,pib,1971-01-01,99.5
+Mali,pib,1972-01-01,136.5
+Mali,pib,1973-01-01,151.0
+Mali,pib,1974-01-01,197.9
+Mali,pib,1975-01-01,211.7
+Mali,pib,1976-01-01,260.4
+Mali,pib,1977-01-01,356.0
+Mali,pib,1978-01-01,378.6
+Mali,pib,1979-01-01,409.8
+Mali,pib,1980-01-01,465.6
+Mali,pib,1981-01-01,531.9
+Mali,pib,1982-01-01,551.4
+Mali,pib,1983-01-01,586.9
+Mali,pib,1984-01-01,590.3
+Mali,pib,1985-01-01,551.4
+Mali,pib,1986-01-01,586.9
+Mali,pib,1987-01-01,590.3
+Mali,pib,1988-01-01,585.8
+Mali,pib,1989-01-01,644.9
+Mali,pib,1990-01-01,743.77
+Mali,pib,1991-01-01,848.5
+Mali,pib,1992-01-01,819.32
+Mali,pib,1993-01-01,872.42
+Mali,pib,1994-01-01,1239.99
+Mali,pib,1995-01-01,1424.43
+Mali,pib,1996-01-01,1610.26
+Mali,pib,1997-01-01,1676.16
+Mali,pib,1998-01-01,1932.12
+Mali,pib,1999-01-01,2117.67
+Mali,pib,2000-01-01,2103.27
+Mali,pib,2001-01-01,2540.2
+Mali,pib,2002-01-01,2711.11
+Mali,pib,2003-01-01,2733.68
+Mali,pib,2004-01-01,2876.24
+Mali,pib,2005-01-01,3294.06
+Mali,pib,2006-01-01,3607.84
+Mali,pib,2007-01-01,3903.96
+Mali,pib,2008-01-01,4366.47
+Mali,pib,2009-01-01,4807.34
+Mali,pib,2010-01-01,5288.94
+Mali,pib,2011-01-01,6123.93
+Mali,pib,2012-01-01,6352.36
+Mali,pib,2013-01-01,6540.56
+Mali,pib,2014-01-01,8365.95
+Mali,pib,2015-01-01,9212.99
+Mali,pib,2016-01-01,9922.5
+Mali,pib,2017-01-01,10630.9
+Mali,pib,2018-01-01,11313.4
+Mali,pib,2019-01-01,11998.0
+Mali,pib,2020-01-01,11913.8
+Mali,pib,2021-01-01,12753.77
+Mali,pib,2022-01-01,13956.0
+Mali,pib,2023-01-01,14934.7
+Mali,pib,2024-01-01,15967.3
+Mali,inflation,1998-01-01,4.06
+Mali,inflation,1999-01-01,-1.17
+Mali,inflation,2000-01-01,-0.75
+Mali,inflation,2001-01-01,5.18
+Mali,inflation,2002-01-01,5.03
+Mali,inflation,2003-01-01,-1.32
+Mali,inflation,2004-01-01,-3.1
+Mali,inflation,2005-01-01,6.42
+Mali,inflation,2006-01-01,1.52
+Mali,inflation,2007-01-01,1.42
+Mali,inflation,2008-01-01,9.18
+Mali,inflation,2009-01-01,2.38
+Mali,inflation,2010-01-01,1.2
+Mali,inflation,2011-01-01,3.0
+Mali,inflation,2012-01-01,5.3
+Mali,inflation,2013-01-01,-0.6
+Mali,inflation,2014-01-01,0.9
+Mali,inflation,2015-01-01,1.4
+Mali,inflation,2016-01-01,-1.8
+Mali,inflation,2017-01-01,2.4
+Mali,inflation,2018-01-01,1.9
+Mali,inflation,2019-01-01,-3.0
+Mali,inflation,2020-01-01,0.5
+Mali,inflation,2021-01-01,3.9
+Mali,inflation,2022-01-01,9.7
+Mali,inflation,2023-01-01,2.1
+Mali,inflation,2024-01-01,3.2

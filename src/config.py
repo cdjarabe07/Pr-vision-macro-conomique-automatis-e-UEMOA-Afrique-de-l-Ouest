@@ -46,6 +46,36 @@ INDICATEURS = {"masse_monetaire_senegal": {
         "series_code": "KKKSR1040A0BP",
         "description": "PIB - Services, Sénégal",
     },
+    "pib_cote_ivoire": {
+        "dataset_code": "PIBN",
+        "series_code": "AAASR1015A0BP",
+        "description": "PIB nominal, Côte d'Ivoire",
+    },
+    "inflation_cote_ivoire": {
+        "dataset_code": "TAUXINFL_A",
+        "series_code": "AAASR3072A0BP",
+        "description": "Taux d'inflation moyen annuel (IPC), Côte d'Ivoire",
+    },
+    "pib_burkina": {
+        "dataset_code": "PIBN",
+        "series_code": "CCCSR1015A0BP",
+        "description": "PIB nominal, Burkina Faso",
+    },
+    "inflation_burkina": {
+        "dataset_code": "TAUXINFL_A",
+        "series_code": "CCCSR3072A0BP",
+        "description": "Taux d'inflation moyen annuel (IPC), Burkina Faso",
+    },
+    "pib_mali": {
+        "dataset_code": "PIBN",
+        "series_code": "DDDSR1015A0BP",
+        "description": "PIB nominal, Mali",
+    },
+    "inflation_mali": {
+        "dataset_code": "TAUXINFL_A",
+        "series_code": "DDDSR3072A0BP",
+        "description": "Taux d'inflation moyen annuel (IPC), Mali",
+    },
 }
 
 PROVIDER = "BCEAO"
