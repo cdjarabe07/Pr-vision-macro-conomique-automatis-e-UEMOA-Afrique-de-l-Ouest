@@ -34,5 +34,3 @@ Peu de projets data science publics traitent de données BCEAO/UEMOA. Ce pipelin
 ## Limites connues
 - Peu de données pour l'inflation (27 ans) : modèles simples privilégiés
 - Le taux de change suit une marche aléatoire, difficile à prévoir par nature
-
-## Développement
