@@ -1,5 +1,118 @@
 [
   {
+    "id": "donnees-bm:2026-10-08T05:38:46Z",
+    "type": "donnees",
+    "date": "2026-10-08T05:38:46Z",
+    "source": "export_banque_mondiale.py",
+    "indicateurs": [
+      "population",
+      "population_urbaine",
+      "pib_habitant_usd",
+      "esperance_vie",
+      "mortalite_moins_5_ans",
+      "pauvrete",
+      "acces_electricite",
+      "acces_eau",
+      "scolarisation_primaire"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "fournisseur": "Banque mondiale, World Development Indicators (API)",
+      "jeu": "bm",
+      "mise_a_jour_source": "2026-07-13"
+    }
+  },
+  {
+    "id": "donnees:2026-10-08T05:34:28Z",
+    "type": "donnees",
+    "date": "2026-10-08T05:34:28Z",
+    "source": "export_portail.py",
+    "indicateurs": [
+      "pib_nominal",
+      "croissance_reelle",
+      "taux_investissement",
+      "inflation",
+      "dette_pib",
+      "solde_budgetaire_pib",
+      "pression_fiscale",
+      "balance_courante_pib",
+      "masse_monetaire",
+      "credit_economie_pib",
+      "poids_primaire",
+      "poids_secondaire",
+      "poids_tertiaire",
+      "contribution_primaire",
+      "contribution_secondaire",
+      "contribution_tertiaire",
+      "taux_epargne",
+      "investissement_public_pib",
+      "inflation_glissement",
+      "solde_hors_dons_pib",
+      "depenses_courantes_pib",
+      "investissement_ressources_internes_pib",
+      "exportations_biens",
+      "importations_biens",
+      "ouverture_pib",
+      "balance_courante_hors_dons_pib",
+      "creances_interieures_pib",
+      "actifs_exterieurs_nets",
+      "taux_change_usd"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo",
+      "uemoa"
+    ],
+    "details": {
+      "fournisseur": "BCEAO via DBnomics (datasets IMECO, TC_A)",
+      "observations": 6701,
+      "derniere_annee": 2024
+    }
+  },
+  {
+    "id": "serie:2026-10-08T05:34:28Z",
+    "type": "serie",
+    "date": "2026-10-08T05:34:28Z",
+    "source": "export_portail.py",
+    "indicateurs": [
+      "poids_primaire",
+      "poids_secondaire",
+      "poids_tertiaire",
+      "contribution_primaire",
+      "contribution_secondaire",
+      "contribution_tertiaire",
+      "taux_epargne",
+      "investissement_public_pib",
+      "inflation_glissement",
+      "solde_hors_dons_pib",
+      "depenses_courantes_pib",
+      "investissement_ressources_internes_pib",
+      "exportations_biens",
+      "importations_biens",
+      "ouverture_pib",
+      "balance_courante_hors_dons_pib",
+      "creances_interieures_pib",
+      "actifs_exterieurs_nets"
+    ],
+    "zones": [],
+    "details": {}
+  },
+  {
     "id": "donnees-fmi-pcps:2026-10-08T05:09:27Z",
     "type": "donnees",
     "date": "2026-10-08T05:09:27Z",

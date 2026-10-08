@@ -92,7 +92,52 @@ INDICATEURS = [
      "libelle": "Masse monétaire (M2)"},
     {"id": "credit_economie_pib", "suffixe": "SF1582A0AP", "famille": "monnaie", "unite": "% du PIB",
      "libelle": "Créances sur l'économie (autres secteurs)", "controle": "SF1420A0AP"},
+
+    # --- Ajouts (structure de l'économie, finances publiques, échanges, monnaie).
+    # Les ratios à libellé ambigu « (en % du PIB) » ont été identifiés en les
+    # recalculant à partir des séries en niveau (écart médian ≤ 0,03 point).
+    {"id": "poids_primaire", "suffixe": "SR1044A0BP", "famille": "production", "unite": "% du PIB",
+     "libelle": "Poids du secteur primaire"},
+    {"id": "poids_secondaire", "suffixe": "SR1045A0BP", "famille": "production", "unite": "% du PIB",
+     "libelle": "Poids du secteur secondaire"},
+    {"id": "poids_tertiaire", "suffixe": "SR1046A0BP", "famille": "production", "unite": "% du PIB",
+     "libelle": "Poids du secteur tertiaire"},
+    {"id": "contribution_primaire", "suffixe": "SR1047A0BP", "famille": "production", "unite": "points de %",
+     "libelle": "Contribution du secteur primaire à la croissance", "groupe_zeros": "contributions"},
+    {"id": "contribution_secondaire", "suffixe": "SR1048A0BP", "famille": "production", "unite": "points de %",
+     "libelle": "Contribution du secteur secondaire à la croissance", "groupe_zeros": "contributions"},
+    {"id": "contribution_tertiaire", "suffixe": "SR1049A0BP", "famille": "production", "unite": "points de %",
+     "libelle": "Contribution du secteur tertiaire à la croissance", "groupe_zeros": "contributions"},
+    {"id": "taux_epargne", "suffixe": "SR1043A0BP", "famille": "production", "unite": "% du PIB",
+     "libelle": "Taux d'épargne intérieure"},
+    {"id": "investissement_public_pib", "suffixe": "SR1051A0BP", "famille": "production", "unite": "% du PIB",
+     "libelle": "Taux d'investissement public"},
+    {"id": "inflation_glissement", "suffixe": "SR3073A0BP", "famille": "prix", "unite": "%",
+     "libelle": "Taux d'inflation en glissement annuel (fin décembre)"},
+    {"id": "solde_hors_dons_pib", "suffixe": "FP1090A0AP", "famille": "finances_publiques", "unite": "% du PIB",
+     "libelle": "Solde budgétaire global, hors dons (base engagement)", "controle": "FP1042A0AP"},
+    {"id": "depenses_courantes_pib", "suffixe": "FP1093A0AP", "famille": "finances_publiques", "unite": "% du PIB",
+     "libelle": "Dépenses courantes", "controle": "FP1025A0AP"},
+    {"id": "investissement_ressources_internes_pib", "suffixe": "FP1095A0AP", "famille": "finances_publiques",
+     "unite": "% du PIB", "libelle": "Investissements sur ressources internes", "controle": "FP1094A0AP"},
+    {"id": "exportations_biens", "suffixe": "SE1403A0AP", "famille": "echanges", "unite": "Mds FCFA",
+     "libelle": "Exportations de biens FOB"},
+    # Importations : enregistrées en négatif jusqu'en 2009 puis en positif (changement
+    # de convention constaté dans toutes les zones) ; reprises à partir de 2010 seulement.
+    {"id": "importations_biens", "suffixe": "SE1419A0AP", "famille": "echanges", "unite": "Mds FCFA",
+     "libelle": "Importations de biens FOB", "debut": 2010,
+     "motif_debut": "convention de signe différente avant 2010 (valeurs négatives)"},
+    {"id": "ouverture_pib", "suffixe": "SE1487A0AP", "famille": "echanges", "unite": "% du PIB",
+     "libelle": "Degré d'ouverture (exportations + importations de biens et services)"},
+    {"id": "balance_courante_hors_dons_pib", "suffixe": "SE1489A0AP", "famille": "echanges", "unite": "% du PIB",
+     "libelle": "Balance courante hors dons"},
+    {"id": "creances_interieures_pib", "suffixe": "SF1581A0AP", "famille": "monnaie", "unite": "% du PIB",
+     "libelle": "Créances intérieures", "controle": "SF1416A0AP"},
+    {"id": "actifs_exterieurs_nets", "suffixe": "SF1413A0AP", "famille": "monnaie", "unite": "Mds FCFA",
+     "libelle": "Actifs extérieurs nets"},
 ]
+
+SUFFIXE_CROISSANCE = "SR1041A0BP"
 
 # Taux de change : publié pour l'ensemble UMOA uniquement (dataset TC_A).
 TAUX_CHANGE = {"id": "taux_change_usd", "serie": "BCEAO/TC_A/ZZZSF3100A0GP", "famille": "change",
@@ -226,8 +271,15 @@ def main() -> int:
         for z, zone in ZONES.items():
             code = z + ind["suffixe"]
             obs = dict(par_code.get(code, {}))
+            if ind.get("debut"):
+                obs = {a: v for a, v in obs.items() if a >= ind["debut"]}
             niveau = par_code.get(z + ind["controle"], {}) if ind.get("controle") else {}
             zeros = [a for a, v in obs.items() if v == 0 and niveau.get(a)]
+            if ind.get("groupe_zeros") == "contributions":
+                # Les trois contributions à 0 alors que la croissance ne l'est pas : remplissage.
+                freres = [par_code.get(z + i["suffixe"], {}) for i in INDICATEURS if i.get("groupe_zeros") == "contributions"]
+                croissance = par_code.get(z + SUFFIXE_CROISSANCE, {})
+                zeros = [a for a in obs if all(f.get(a) == 0 for f in freres) and croissance.get(a)]
             for a in zeros:
                 del obs[a]
             if zeros:
@@ -243,6 +295,8 @@ def main() -> int:
             "id": ind["id"], "famille": ind["famille"], "unite": ind["unite"], "libelle_source": ind["libelle"],
             "serie_bceao": f"BCEAO/IMECO/<zone>{ind['suffixe']}",
             "periode": [min(annees), max(annees)] if annees else None,
+            "ratio_controle": bool(ind.get("controle")),
+            **({"debut_retenu": ind["debut"], "motif_debut": ind["motif_debut"]} if ind.get("debut") else {}),
         })
 
     obs_tc = serie_vers_dict(tc)
@@ -279,10 +333,18 @@ def main() -> int:
 
     args.dest.mkdir(parents=True, exist_ok=True)
     cible = args.dest / "portail.json"
+    anciens = set()
+    if cible.exists():
+        anciens = {i["id"] for i in json.loads(cible.read_text(encoding="utf-8")).get("indicateurs", [])}
     cible.write_text(json.dumps(portail, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"  portail -> {cible} ({cible.stat().st_size // 1024} Ko)")
 
     # Journal : export des données et ruptures déclarées (une seule fois chacune).
+    nouveaux = [i["id"] for i in indicateurs_meta if anciens and i["id"] not in anciens]
+    if nouveaux:
+        e = journal.evenement("serie", portail["generated_at"], "export_portail.py", indicateurs=nouveaux)
+        if journal.enregistrer(e):
+            print(f"  journal : {len(nouveaux)} nouvelle(s) série(s)")
     for e in journal.evenements_portail(portail):
         if journal.enregistrer(e):
             print(f"  journal : {e['id']}")
