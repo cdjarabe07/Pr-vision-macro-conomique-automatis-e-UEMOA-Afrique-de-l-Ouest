@@ -1,5 +1,57 @@
 [
   {
+    "id": "donnees-fmi-pcps:2026-10-08T05:09:27Z",
+    "type": "donnees",
+    "date": "2026-10-08T05:09:27Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "petrole",
+      "cacao",
+      "coton",
+      "or",
+      "uranium",
+      "arachide",
+      "riz",
+      "ble"
+    ],
+    "zones": [],
+    "details": {
+      "fournisseur": "FMI, Primary Commodity Price System (PCPS), via DBnomics",
+      "jeu": "pcps",
+      "dernier_mois": "2025-06"
+    }
+  },
+  {
+    "id": "donnees-fmi-weo:2026-10-08T05:09:27Z",
+    "type": "donnees",
+    "date": "2026-10-08T05:09:27Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "croissance_reelle",
+      "inflation",
+      "dette_apu",
+      "solde_apu",
+      "balance_courante"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "fournisseur": "FMI, Perspectives de l'économie mondiale (WEO), édition 2025-04, via DBnomics",
+      "jeu": "weo",
+      "edition": "2025-04",
+      "premiere_annee": 2025,
+      "derniere_annee": 2030
+    }
+  },
+  {
     "id": "donnees:2026-10-08T02:41:34Z",
     "type": "donnees",
     "date": "2026-10-08T02:41:34Z",

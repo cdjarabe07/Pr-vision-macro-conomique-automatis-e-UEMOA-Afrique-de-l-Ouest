@@ -6,7 +6,7 @@ Chaque script du pipeline enregistre ici ce qu'il vient réellement de produire
 texte éditorial : le portail rédige les phrases (FR/EN) à partir de ces champs.
 
 Types d'événements :
-    donnees     export des séries du portail (export_portail.py)
+    donnees     export des séries du portail (export_portail.py, export_fmi.py)
     previsions  recalcul des prévisions (observatoire.modeles.prevision)
     methode     changement méthodologique déclaré (ex. rupture de série)
     serie       ajout d'une série au portail
@@ -110,6 +110,25 @@ def evenements_portail(portail: dict, source: str = "export_portail.py") -> list
             details={"nature": "rupture", "rupture": r["id"], "premiere_annee": r["premiere_annee"], "statut": r["statut"]},
         ))
     return sortie
+
+
+def evenements_fmi(fmi: dict, source: str = "export_fmi.py") -> list[dict]:
+    """Événements décrivant un fmi.json : prix des matières premières, projections WEO."""
+    mp, pr = fmi["matieres_premieres"], fmi["projections"]
+    return [
+        evenement(
+            "donnees", fmi["generated_at"], source, id_=f"donnees-fmi-pcps:{fmi['generated_at']}",
+            indicateurs=[p["id"] for p in mp["produits"]],
+            details={"fournisseur": mp["source"], "jeu": "pcps", "dernier_mois": mp["dernier_mois"]},
+        ),
+        evenement(
+            "donnees", fmi["generated_at"], source, id_=f"donnees-fmi-weo:{fmi['generated_at']}",
+            indicateurs=[i["id"] for i in pr["indicateurs"]],
+            zones=sorted({z for s in pr["series"].values() for z in s}),
+            details={"fournisseur": pr["source"], "jeu": "weo", "edition": pr["edition"],
+                     "premiere_annee": pr["premiere_annee"], "derniere_annee": pr["derniere_annee"]},
+        ),
+    ]
 
 
 def evenement_previsions(metriques: list[dict], source: str = "observatoire.modeles.prevision") -> dict:

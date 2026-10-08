@@ -74,6 +74,20 @@ class Journal(unittest.TestCase):
         self.assertEqual(e["indicateurs"], ["pib"])
         self.assertEqual((e["details"]["premiere_annee"], e["details"]["derniere_annee"]), (2025, 2026))
 
+    def test_evenements_fmi(self):
+        fmi = {
+            "generated_at": "2026-10-08T10:00:00Z",
+            "matieres_premieres": {"source": "FMI PCPS", "dernier_mois": "2025-06", "produits": [{"id": "cacao"}]},
+            "projections": {"source": "FMI WEO", "edition": "2025-04", "premiere_annee": 2025, "derniere_annee": 2030,
+                            "indicateurs": [{"id": "inflation"}], "series": {"inflation": {"niger": [[2025, 4.7]]}}},
+        }
+        pcps, weo = J.evenements_fmi(fmi)
+        self.assertEqual(pcps["details"]["dernier_mois"], "2025-06")
+        self.assertEqual(weo["zones"], ["niger"])
+        self.assertNotEqual(pcps["id"], weo["id"])
+        for e in (pcps, weo):
+            J.valider(e)
+
     def test_reconstitution_idempotente(self):
         portail = Path(self.tmp.name) / "portail.json"
         metriques = Path(self.tmp.name) / "metriques.json"
