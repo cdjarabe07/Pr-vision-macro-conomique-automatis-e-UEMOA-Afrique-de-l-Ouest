@@ -45,6 +45,8 @@ from pathlib import Path
 import pandas as pd
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
+from observatoire import journal
+
 for _flux in (getattr(sys, "stdout", None), getattr(sys, "stderr", None)):
     if _flux is not None and hasattr(_flux, "reconfigure"):
         _flux.reconfigure(encoding="utf-8", errors="replace")
@@ -317,6 +319,10 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     ecrire(args.dossier / "previsions.json", previsions)
     ecrire(args.dossier / "previsions_metriques.json", metriques)
+    if args.dossier == DOSSIER_PROCESSED:
+        e = journal.evenement_previsions(metriques)
+        if journal.enregistrer(e):
+            print(f"Journal : {e['id']}")
     print(f"Écrit : {args.dossier / 'previsions.json'}")
     print(f"Écrit : {args.dossier / 'previsions_metriques.json'}")
     return 0

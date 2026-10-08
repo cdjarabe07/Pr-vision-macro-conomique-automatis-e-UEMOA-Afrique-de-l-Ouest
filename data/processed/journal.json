@@ -1,0 +1,75 @@
+[
+  {
+    "id": "donnees:2026-10-08T02:41:34Z",
+    "type": "donnees",
+    "date": "2026-10-08T02:41:34Z",
+    "source": "export_portail.py",
+    "indicateurs": [
+      "pib_nominal",
+      "croissance_reelle",
+      "taux_investissement",
+      "inflation",
+      "dette_pib",
+      "solde_budgetaire_pib",
+      "pression_fiscale",
+      "balance_courante_pib",
+      "masse_monetaire",
+      "credit_economie_pib",
+      "taux_change_usd"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo",
+      "uemoa"
+    ],
+    "details": {
+      "fournisseur": "BCEAO via DBnomics (datasets IMECO, TC_A)",
+      "observations": 2688,
+      "derniere_annee": 2024
+    }
+  },
+  {
+    "id": "methode:dette_perimetre_2022",
+    "type": "methode",
+    "date": "2026-10-08",
+    "source": "export_portail.py",
+    "indicateurs": [
+      "dette_pib"
+    ],
+    "zones": [],
+    "details": {
+      "nature": "rupture",
+      "rupture": "dette_perimetre_2022",
+      "premiere_annee": 2022,
+      "statut": "deduit"
+    }
+  },
+  {
+    "id": "previsions:2026-10-07T23:44:22Z",
+    "type": "previsions",
+    "date": "2026-10-07T23:44:22Z",
+    "source": "observatoire.modeles.prevision",
+    "indicateurs": [
+      "pib",
+      "inflation",
+      "agriculture",
+      "industrie",
+      "services",
+      "masse_monetaire"
+    ],
+    "zones": [
+      "senegal"
+    ],
+    "details": {
+      "premiere_annee": 2025,
+      "derniere_annee": 2026,
+      "derniere_observation": 2024
+    }
+  }
+]

@@ -15,7 +15,8 @@ Fichiers produits :
     uemoa-dashboard/src/data/portail.json            (consommé par le frontend)
 
 Ce script n'écrase aucun fichier existant du dashboard : il n'écrit que
-portail.json. export_dashboard.py et ses JSON restent inchangés.
+portail.json et journal.json (journal des mises à jour, observatoire/journal.py).
+export_dashboard.py et ses JSON restent inchangés.
 
 Contrôles intégrés :
     - chaque ratio « en % du PIB » publié par la BCEAO est recalculé à partir
@@ -23,7 +24,10 @@ Contrôles intégrés :
     - un ratio publié à exactement 0 alors que sa série en niveau est non nulle
       est un zéro de remplissage (ex. solde budgétaire 2001-2008 de certains
       pays) : il est exporté comme valeur manquante, et signalé ;
-    - un indicateur absent pour une zone est signalé, jamais complété.
+    - un indicateur absent pour une zone est signalé, jamais complété ;
+    - les ruptures de série déclarées (RUPTURES) sont revérifiées dans les
+      séries en niveau et exportées avec leurs sources ; aucune valeur n'est
+      corrigée.
 
 Usage :
     python export_portail.py
@@ -42,6 +46,8 @@ from pathlib import Path
 
 import pandas as pd
 from dbnomics import fetch_series
+
+from observatoire import journal
 
 for _flux in (getattr(sys, "stdout", None), getattr(sys, "stderr", None)):
     if _flux is not None and hasattr(_flux, "reconfigure"):
@@ -93,6 +99,62 @@ TAUX_CHANGE = {"id": "taux_change_usd", "serie": "BCEAO/TC_A/ZZZSF3100A0GP", "fa
                "unite": "FCFA pour 1 USD", "libelle": "Taux de change FCFA / dollar US", "zone": "ZZZ"}
 
 SEUIL_ECART_MEDIAN = 1.0  # point de % du PIB
+
+# Ruptures de série connues. Les valeurs ne sont jamais modifiées : la rupture
+# est déclarée dans portail.json pour que le portail interrompe les graphiques,
+# n'évalue pas les critères à travers elle et l'explique.
+#
+# « etabli » : ce que les publications BCEAO citées affirment explicitement.
+# « deduit »  : ce que l'Observatoire conclut en recoupant ces chiffres avec IMECO.
+RUPTURES = [
+    {
+        "id": "dette_perimetre_2022",
+        "indicateurs": ["dette_pib"],
+        "serie_niveau": "FP3001A0FA",
+        "zones": "toutes",
+        "premiere_annee": 2022,
+        "nature": "perimetre",
+        "statut": "deduit",
+        "etabli": [
+            {
+                "source": "BCEAO, Rapport sur la politique monétaire dans l'UMOA, mars 2023",
+                "reference": "tableau 33",
+                "url": "https://www.bceao.int/sites/default/files/2023-05/BCEAO%20-%20Rapport%20sur%20la%20politique%20mone%CC%81taire_Umoa_Mars_2023.pdf",
+                "zone": "uemoa", "annee": 2021, "grandeur": "dette_publique_totale",
+                "montant_mds_fcfa": 54845.5, "pct_pib": 54.8,
+            },
+            {
+                "source": "BCEAO, Rapport annuel 2023",
+                "reference": "tableau 6",
+                "url": "https://www.bceao.int/sites/default/files/2024-09/Rapport_Annuel_2023_BCEAO_20092024.pdf",
+                "annee": 2022, "grandeur": "dette_publique_exterieure",
+                "pct_pib": {"benin": 37.4, "burkina": 26.0, "cote_ivoire": 34.4, "guinee_bissau": 35.3,
+                            "mali": 28.6, "niger": 32.7, "senegal": 53.9, "togo": 25.4, "uemoa": 35.7},
+            },
+        ],
+        "verifie_le": "2026-10-08",
+    },
+]
+SEUIL_SAUT_RUPTURE = 1.4  # encours 1re année / année précédente
+
+
+def controler_ruptures(par_code: dict[str, dict[int, float]]) -> None:
+    """Vérifie que chaque rupture déclarée est toujours visible dans la série en niveau.
+
+    Non bloquant : si la BCEAO révise ses séries, l'avertissement invite à
+    réexaminer la déclaration plutôt qu'à la retirer en silence.
+    """
+    for r in RUPTURES:
+        an = r["premiere_annee"]
+        sauts = {}
+        for z, zone in ZONES.items():
+            niveau = par_code.get(z + r["serie_niveau"], {})
+            if niveau.get(an) and niveau.get(an - 1):
+                sauts[zone["id"]] = niveau[an] / niveau[an - 1]
+        nb = sum(v >= SEUIL_SAUT_RUPTURE for v in sauts.values())
+        etat = "présente" if sauts and nb >= len(sauts) / 2 else "À RÉEXAMINER"
+        detail = ", ".join(f"{k} ×{v:.2f}" for k, v in sauts.items())
+        print(f"  rupture {r['id']} ({an - 1}→{an}) : {etat} — {detail}")
 
 
 def annee(period) -> int:
@@ -151,6 +213,9 @@ def main() -> int:
         print(f"ARRÊT : ratios incohérents ({', '.join(erreurs)}). Aucun fichier écrit.")
         return 1
 
+    print("Contrôle des ruptures déclarées…")
+    controler_ruptures(par_code)
+
     # Séries du portail : {indicateur: {zone: [[année, valeur], …]}}
     series: dict[str, dict[str, list]] = {}
     indicateurs_meta = []
@@ -197,6 +262,7 @@ def main() -> int:
         "zones": [{"code_bceao": z, **v} for z, v in ZONES.items()],
         "indicateurs": indicateurs_meta,
         "series": series,
+        "ruptures": RUPTURES,
     }
 
     nb_points = sum(len(v) for s in series.values() for v in s.values())
@@ -215,6 +281,13 @@ def main() -> int:
     cible = args.dest / "portail.json"
     cible.write_text(json.dumps(portail, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"  portail -> {cible} ({cible.stat().st_size // 1024} Ko)")
+
+    # Journal : export des données et ruptures déclarées (une seule fois chacune).
+    for e in journal.evenements_portail(portail):
+        if journal.enregistrer(e):
+            print(f"  journal : {e['id']}")
+    journal.ecrire(journal.charger(), args.dest / "journal.json")
+    print(f"  journal -> {args.dest / 'journal.json'}")
     return 0
 
 

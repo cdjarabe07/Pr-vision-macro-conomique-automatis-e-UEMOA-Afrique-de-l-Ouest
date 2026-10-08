@@ -80,6 +80,7 @@ PASSTHROUGH = {
     "previsions.json": "previsions.json",
     "previsions_metriques.json": "previsions_metriques.json",
     "comparaison_pays.json": "comparaison_pays.json",
+    "journal.json": "journal.json",
 }
 
 
