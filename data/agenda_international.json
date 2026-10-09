@@ -1,0 +1,27 @@
+[
+  {
+    "id": "fmi-bm-assemblees-annuelles-2026",
+    "date": "2026-10-12",
+    "date_fin": "2026-10-18",
+    "institution": "FMI · Banque mondiale",
+    "type": "reunion",
+    "titre": {
+      "fr": "Assemblées annuelles du FMI et du Groupe de la Banque mondiale, Bangkok",
+      "en": "Annual Meetings of the IMF and the World Bank Group, Bangkok"
+    },
+    "url": "https://www.worldbank.org/en/meetings/splash/annual",
+    "verifie_le": "2026-10-09"
+  },
+  {
+    "id": "fmi-weo-2026-10",
+    "date": "2026-10-13",
+    "institution": "FMI",
+    "type": "publication",
+    "titre": {
+      "fr": "FMI, Perspectives de l'économie mondiale, octobre 2026",
+      "en": "IMF, World Economic Outlook, October 2026"
+    },
+    "url": "https://www.imf.org/en/publications/weo/issues/2026/10/13/world-economic-outlook-october-2026",
+    "verifie_le": "2026-10-09"
+  }
+]
