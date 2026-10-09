@@ -1,5 +1,303 @@
 [
   {
+    "id": "donnees-bm:2026-10-09T17:13:44Z",
+    "type": "donnees",
+    "date": "2026-10-09T17:13:44Z",
+    "source": "export_banque_mondiale.py",
+    "indicateurs": [
+      "population",
+      "population_urbaine",
+      "pib_habitant_usd",
+      "esperance_vie",
+      "mortalite_moins_5_ans",
+      "pauvrete",
+      "acces_electricite",
+      "acces_eau",
+      "scolarisation_primaire",
+      "production_alimentaire",
+      "envois_fonds",
+      "ide_entrees",
+      "aide_publique",
+      "service_dette"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "fournisseur": "Banque mondiale, World Development Indicators (API)",
+      "jeu": "bm",
+      "mise_a_jour_source": "2026-10-08"
+    }
+  },
+  {
+    "id": "donnees-fmi-cpi:2026-10-09T17:03:21Z",
+    "type": "donnees",
+    "date": "2026-10-09T17:03:21Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "inflation_mensuelle"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "fournisseur": "FMI, Consumer Price Index (CPI), via DBnomics",
+      "jeu": "cpi",
+      "dernier_mois": "2025-06"
+    }
+  },
+  {
+    "id": "donnees-fmi-pcps:2026-10-09T17:03:21Z",
+    "type": "donnees",
+    "date": "2026-10-09T17:03:21Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "petrole",
+      "cacao",
+      "coton",
+      "or",
+      "uranium",
+      "arachide",
+      "riz",
+      "ble"
+    ],
+    "zones": [],
+    "details": {
+      "fournisseur": "FMI, Primary Commodity Price System (PCPS), via DBnomics",
+      "jeu": "pcps",
+      "dernier_mois": "2025-06"
+    }
+  },
+  {
+    "id": "donnees-fmi-weo:2026-10-09T17:03:21Z",
+    "type": "donnees",
+    "date": "2026-10-09T17:03:21Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "croissance_reelle",
+      "inflation",
+      "dette_apu",
+      "solde_apu",
+      "balance_courante"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "fournisseur": "FMI, Perspectives de l'économie mondiale (WEO), édition 2025-04, via DBnomics",
+      "jeu": "weo",
+      "edition": "2025-04",
+      "premiere_annee": 2025,
+      "derniere_annee": 2030
+    }
+  },
+  {
+    "id": "analyse:convergence-bilan-2024",
+    "type": "analyse",
+    "date": "2026-10-09",
+    "source": "contenu/analyses",
+    "indicateurs": [
+      "solde_budgetaire_pib",
+      "inflation",
+      "dette_pib",
+      "pression_fiscale"
+    ],
+    "zones": [
+      "uemoa",
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "analyse": "convergence-bilan-2024",
+      "dossier": "convergence",
+      "titre": {
+        "fr": "Convergence en 2024 : aucun pays ne respecte les trois critères de premier rang",
+        "en": "Convergence in 2024: no country meets all three first-rank criteria"
+      },
+      "validee_par": "Caleb Djarabé"
+    }
+  },
+  {
+    "id": "analyse:croissance-moteurs-sectoriels",
+    "type": "analyse",
+    "date": "2026-10-09",
+    "source": "contenu/analyses",
+    "indicateurs": [
+      "croissance_reelle",
+      "contribution_primaire",
+      "contribution_secondaire",
+      "contribution_tertiaire",
+      "poids_primaire"
+    ],
+    "zones": [
+      "uemoa",
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "analyse": "croissance-moteurs-sectoriels",
+      "dossier": "croissance",
+      "titre": {
+        "fr": "Croissance de l'UEMOA : les services en moteur, le secteur primaire en balancier",
+        "en": "WAEMU growth: services as the engine, the primary sector as the swing factor"
+      },
+      "validee_par": "Caleb Djarabé"
+    }
+  },
+  {
+    "id": "analyse:echanges-cacao-or-2024",
+    "type": "analyse",
+    "date": "2026-10-09",
+    "source": "contenu/analyses",
+    "indicateurs": [
+      "exportations_biens",
+      "importations_biens",
+      "balance_courante_pib"
+    ],
+    "zones": [
+      "uemoa",
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "analyse": "echanges-cacao-or-2024",
+      "dossier": "echanges",
+      "titre": {
+        "fr": "Échanges : la flambée du cacao et de l'or, et un déficit courant qui se réduit",
+        "en": "Trade: the cocoa and gold price surge, and a narrowing current account deficit"
+      },
+      "validee_par": "Caleb Djarabé"
+    }
+  },
+  {
+    "id": "analyse:finances-publiques-deficits-depuis-2020",
+    "type": "analyse",
+    "date": "2026-10-09",
+    "source": "contenu/analyses",
+    "indicateurs": [
+      "solde_budgetaire_pib",
+      "pression_fiscale",
+      "dette_pib"
+    ],
+    "zones": [
+      "uemoa",
+      "senegal",
+      "mali",
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "niger",
+      "togo"
+    ],
+    "details": {
+      "analyse": "finances-publiques-deficits-depuis-2020",
+      "dossier": "finances-publiques",
+      "titre": {
+        "fr": "Finances publiques : des déficits au-delà du critère depuis 2020",
+        "en": "Public finances: deficits beyond the criterion since 2020"
+      },
+      "validee_par": "Caleb Djarabé"
+    }
+  },
+  {
+    "id": "analyse:inflation-pic-2022-reflux",
+    "type": "analyse",
+    "date": "2026-10-09",
+    "source": "contenu/analyses",
+    "indicateurs": [
+      "inflation"
+    ],
+    "zones": [
+      "uemoa",
+      "burkina",
+      "mali",
+      "niger",
+      "senegal",
+      "benin"
+    ],
+    "details": {
+      "analyse": "inflation-pic-2022-reflux",
+      "dossier": "inflation",
+      "titre": {
+        "fr": "Inflation dans l'UEMOA : le pic de 2022 et un reflux inégal",
+        "en": "Inflation in WAEMU: the 2022 peak and an uneven decline"
+      },
+      "validee_par": "Caleb Djarabé"
+    }
+  },
+  {
+    "id": "analyse:monnaie-credit-avoirs-exterieurs",
+    "type": "analyse",
+    "date": "2026-10-09",
+    "source": "contenu/analyses",
+    "indicateurs": [
+      "credit_economie_pib",
+      "masse_monetaire",
+      "actifs_exterieurs_nets",
+      "taux_change_usd"
+    ],
+    "zones": [
+      "uemoa",
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "analyse": "monnaie-credit-avoirs-exterieurs",
+      "dossier": "monnaie",
+      "titre": {
+        "fr": "Monnaie et crédit : un crédit qui plafonne, des avoirs extérieurs qui ont fondu puis se redressent",
+        "en": "Money and credit: credit levels off, foreign assets shrink then recover"
+      },
+      "validee_par": "Caleb Djarabé"
+    }
+  },
+  {
     "id": "donnees-bm:2026-10-08T05:38:46Z",
     "type": "donnees",
     "date": "2026-10-08T05:38:46Z",

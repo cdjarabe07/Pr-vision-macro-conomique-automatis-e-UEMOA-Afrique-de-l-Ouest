@@ -113,9 +113,16 @@ def evenements_portail(portail: dict, source: str = "export_portail.py") -> list
 
 
 def evenements_fmi(fmi: dict, source: str = "export_fmi.py") -> list[dict]:
-    """Événements décrivant un fmi.json : prix des matières premières, projections WEO."""
+    """Événements décrivant un fmi.json : prix des matières premières, projections WEO,
+    inflation mensuelle (si présente)."""
     mp, pr = fmi["matieres_premieres"], fmi["projections"]
-    return [
+    im = fmi.get("inflation_mensuelle")
+    cpi = [evenement(
+        "donnees", fmi["generated_at"], source, id_=f"donnees-fmi-cpi:{fmi['generated_at']}",
+        indicateurs=["inflation_mensuelle"], zones=sorted(im["pays"]),
+        details={"fournisseur": im["source"], "jeu": "cpi", "dernier_mois": im["dernier_mois"]},
+    )] if im else []
+    return cpi + [
         evenement(
             "donnees", fmi["generated_at"], source, id_=f"donnees-fmi-pcps:{fmi['generated_at']}",
             indicateurs=[p["id"] for p in mp["produits"]],

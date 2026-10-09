@@ -3,9 +3,14 @@
 """
 export_banque_mondiale.py
 =========================
-Indicateurs de population et de conditions de vie des 8 pays de l'UEMOA,
-lus directement sur l'API de la Banque mondiale (World Development Indicators),
-pour les profils pays du portail.
+Indicateurs de population, de conditions de vie et de financement extérieur
+des 8 pays de l'UEMOA, lus directement sur l'API de la Banque mondiale
+(World Development Indicators), pour les profils pays du portail.
+
+Chaque indicateur appartient à un groupe (« conditions » ou « financement »).
+annee_max écarte les années les plus récentes quand elles sont provisoires :
+les entrées d'IDE de 2025 sont publiées alors que l'année n'est pas complète
+(Sénégal : 0,1 % du PIB en 2025 contre 10,3 % en 2024, mise à jour du 8 octobre 2026).
 
 Les libellés source sont conservés dans le fichier exporté (ex. le seuil de
 pauvreté, révisé par la Banque mondiale à 3,00 dollars par jour en PPA 2021).
@@ -24,6 +29,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -54,6 +60,11 @@ INDICATEURS = [
     {"id": "acces_electricite", "code": "EG.ELC.ACCS.ZS", "unite": "% de la population"},
     {"id": "acces_eau", "code": "SH.H2O.BASW.ZS", "unite": "% de la population"},
     {"id": "scolarisation_primaire", "code": "SE.PRM.ENRR", "unite": "% (taux brut)"},
+    {"id": "production_alimentaire", "code": "AG.PRD.FOOD.XD", "unite": "indice 2014-2016 = 100"},
+    {"id": "envois_fonds", "code": "BX.TRF.PWKR.DT.GD.ZS", "unite": "% du PIB", "groupe": "financement"},
+    {"id": "ide_entrees", "code": "BX.KLT.DINV.WD.GD.ZS", "unite": "% du PIB", "groupe": "financement", "annee_max": 2024},
+    {"id": "aide_publique", "code": "DT.ODA.ODAT.GN.ZS", "unite": "% du RNB", "groupe": "financement"},
+    {"id": "service_dette", "code": "DT.TDS.DECT.EX.ZS", "unite": "% des exportations", "groupe": "financement"},
 ]
 
 
@@ -61,10 +72,17 @@ class ErreurControle(ValueError):
     pass
 
 
-def lire(code: str, fin: int) -> tuple[dict, str, list]:
+def lire(code: str, fin: int) -> tuple[dict, str, list, str | None]:
     url = API.format(pays=";".join(PAYS), code=code, debut=DEBUT, fin=fin)
-    with urllib.request.urlopen(url, timeout=120) as r:
-        entete, lignes = json.load(r)
+    for essai in range(3):  # l'API répond parfois lentement : trois essais espacés
+        try:
+            with urllib.request.urlopen(url, timeout=120) as r:
+                entete, lignes = json.load(r)
+            break
+        except (TimeoutError, OSError) as exc:
+            if essai == 2:
+                raise ErreurControle(f"{code} : API injoignable ({exc})") from exc
+            time.sleep(10 * (essai + 1))
     if not lignes:
         raise ErreurControle(f"{code} : aucune donnée")
     nom = lignes[0]["indicator"]["value"]
@@ -93,12 +111,13 @@ def main() -> int:
     sortie_ind, series, brut, majs = [], {}, [], set()
     try:
         for ind in INDICATEURS:
-            s, nom, b, maj = lire(ind["code"], maintenant.year)
+            s, nom, b, maj = lire(ind["code"], ind.get("annee_max", maintenant.year))
             series[ind["id"]] = s
             brut += b
             majs.add(maj)
             fins = {z: v[-1][0] for z, v in s.items()}
             sortie_ind.append({"id": ind["id"], "code": ind["code"], "nom_source": nom, "unite": ind["unite"],
+                               "groupe": ind.get("groupe", "conditions"),
                                "periode": [min(v[0][0] for v in s.values()), max(fins.values())]})
             print(f"  {ind['id']:<24} {nom[:60]:<60} pays {len(s)}  dernière année {min(fins.values())}–{max(fins.values())}")
     except ErreurControle as exc:
