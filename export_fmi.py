@@ -9,7 +9,11 @@ Données internationales du FMI pour le portail (uemoa-dashboard), via DBnomics 
       premières qui comptent pour l'Union (pétrole, cacao, coton, or, uranium,
       arachide, riz, blé) ;
     - WEO   « Perspectives de l'économie mondiale » : projections annuelles par
-      pays (croissance, inflation, dette, solde budgétaire, balance courante) ;
+      pays (croissance, inflation, dette, solde budgétaire, balance courante),
+      lues sur l'API SDMX du FMI dans le jeu daté de l'édition
+      (ex. IMF.RES/WEO_2026_APR_VINTAGE) : DBnomics ne diffuse plus les éditions
+      postérieures à avril 2025. Contrôle : les 8 pays × 5 indicateurs ;
+      la date de mise à jour de chaque pays par le FMI est exportée ;
     - CPI   indices des prix à la consommation mensuels des huit pays, d'où
       l'inflation en glissement annuel (mois / même mois de l'année précédente).
       Contrôles : arrêt si une variation mensuelle de l'indice dépasse
@@ -35,7 +39,11 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 import sys
+import time
+import urllib.request
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -66,9 +74,37 @@ PRODUITS = [
 ]
 DEBUT_PRIX = "2015-01"
 
-EDITION_WEO = "2025-04"
-PREMIERE_ANNEE_PROJECTION = 2025
-DERNIERE_ANNEE_PROJECTION = 2030
+# Édition du WEO : la plus récente publiée sur l'API du FMI (jeux WEO_AAAA_MOI_VINTAGE),
+# à défaut EDITION_WEO. Horizon : de l'année de l'édition à cinq ans après.
+EDITION_WEO = "2026-04"
+LISTE_FLUX = "https://api.imf.org/external/sdmx/2.1/dataflow/IMF.RES/all/latest"
+API_FMI = "https://api.imf.org/external/sdmx/2.1/data/IMF.RES,{flux}/{pays}.{indicateurs}.A?startPeriod={debut}"
+MOIS_EN = {"01": "JAN", "02": "FEB", "03": "MAR", "04": "APR", "05": "MAY", "06": "JUN",
+           "07": "JUL", "08": "AUG", "09": "SEP", "10": "OCT", "11": "NOV", "12": "DEC"}
+
+
+def flux_weo(edition: str = EDITION_WEO) -> str:
+    """« 2026-04 » -> « WEO_2026_APR_VINTAGE » (jeu daté de l'édition sur l'API du FMI)."""
+    an, mois = edition.split("-")
+    return f"WEO_{an}_{MOIS_EN[mois]}_VINTAGE"
+
+
+def editions_dans(liste_xml: str) -> list[str]:
+    """Éditions du WEO présentes dans une liste de jeux SDMX, de la plus ancienne à la plus récente."""
+    inverse = {v: k for k, v in MOIS_EN.items()}
+    trouvees = {f"{a}-{inverse[m]}" for a, m in re.findall(r'id="WEO_(\d{4})_([A-Z]{3})_VINTAGE"', liste_xml) if m in inverse}
+    return sorted(trouvees)
+
+
+def derniere_edition() -> str:
+    try:
+        requete = urllib.request.Request(LISTE_FLUX, headers={"User-Agent": "Mozilla/5.0 (Observatoire UEMOA)"})
+        with urllib.request.urlopen(requete, timeout=120) as r:
+            editions = editions_dans(r.read().decode("utf-8"))
+    except OSError as exc:
+        print(f"  liste des éditions du WEO indisponible ({exc}) : édition {EDITION_WEO} retenue")
+        return EDITION_WEO
+    return editions[-1] if editions else EDITION_WEO
 PAYS = {"BEN": "benin", "BFA": "burkina", "CIV": "cote_ivoire", "GNB": "guinee_bissau",
         "MLI": "mali", "NER": "niger", "SEN": "senegal", "TGO": "togo"}
 PROJECTIONS = [
@@ -118,29 +154,52 @@ def recuperer_prix() -> tuple[list[dict], list[dict]]:
     return produits, brut
 
 
-def recuperer_projections() -> tuple[dict, list[dict]]:
-    ids = [f"IMF/WEO:{EDITION_WEO}/{iso}.{p['code']}.{p['unite_weo']}" for iso in PAYS for p in PROJECTIONS]
-    df = fetch_series(ids)
-    series, brut = {}, []
-    for p in PROJECTIONS:
-        series[p["id"]] = {}
-        for iso, zone in PAYS.items():
-            code = f"{iso}.{p['code']}.{p['unite_weo']}"
-            g = df[df["series_code"] == code]
-            pts = []
-            for per, v in zip(g["original_period"], g["value"]):
-                an = int(str(per)[:4])
-                if PREMIERE_ANNEE_PROJECTION <= an <= DERNIERE_ANNEE_PROJECTION and valeur_ok(v):
-                    pts.append([an, round(float(v), 2)])
-            pts.sort()
-            if not pts:
-                print(f"  absent : {p['id']} / {zone}")
-                continue
-            series[p["id"]][zone] = pts
-            brut += [{"serie": f"IMF/WEO:{EDITION_WEO}/{code}", "periode": a, "valeur": v} for a, v in pts]
-    if not any(series.values()):
-        raise ErreurControle("aucune projection récupérée")
-    return series, brut
+def lire_sdmx(xml: str) -> list[tuple[dict, list[tuple[str, str]]]]:
+    """Séries d'un message SDMX 2.1 (StructureSpecificData) : attributs et observations."""
+    racine = ET.fromstring(xml)
+    sortie = []
+    for el in racine.iter():
+        if el.tag.split("}")[-1] == "Series":
+            obs = [(o.get("TIME_PERIOD"), o.get("OBS_VALUE")) for o in el if o.tag.split("}")[-1] == "Obs"]
+            sortie.append((dict(el.attrib), obs))
+    return sortie
+
+
+def recuperer_projections(edition: str) -> tuple[dict, dict, list[dict]]:
+    flux = flux_weo(edition)
+    premiere, derniere = int(edition[:4]), int(edition[:4]) + 5
+    url = API_FMI.format(flux=flux, pays="+".join(PAYS), indicateurs="+".join(p["code"] for p in PROJECTIONS),
+                         debut=premiere)
+    requete = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Observatoire UEMOA)"})
+    for essai in range(3):
+        try:
+            with urllib.request.urlopen(requete, timeout=120) as r:
+                xml = r.read().decode("utf-8")
+            break
+        except OSError as exc:
+            if essai == 2:
+                raise ErreurControle(f"API du FMI injoignable ({exc})") from exc
+            time.sleep(10 * (essai + 1))
+    par_code = {p["code"]: p for p in PROJECTIONS}
+    series = {p["id"]: {} for p in PROJECTIONS}
+    mises_a_jour, brut = {}, []
+    for attrs, obs in lire_sdmx(xml):
+        iso, code = attrs.get("COUNTRY"), attrs.get("INDICATOR")
+        if iso not in PAYS or code not in par_code:
+            continue
+        zone = PAYS[iso]
+        pts = sorted([int(per), round(float(v), 2)] for per, v in obs
+                     if v not in (None, "", "NaN") and premiere <= int(per) <= derniere)
+        if pts:
+            series[par_code[code]["id"]][zone] = pts
+            brut += [{"serie": f"IMF.RES/{flux}/{iso}.{code}.A", "periode": a, "valeur": v} for a, v in pts]
+        if attrs.get("COUNTRY_UPDATE_DATE"):
+            m, j, a = attrs["COUNTRY_UPDATE_DATE"].split("/")
+            mises_a_jour[zone] = f"{a}-{int(m):02d}-{int(j):02d}"
+    manquants = [f"{p['id']}/{z}" for p in PROJECTIONS for z in PAYS.values() if z not in series[p["id"]]]
+    if manquants:
+        raise ErreurControle(f"projections manquantes : {manquants}")
+    return series, mises_a_jour, brut
 
 
 def mois_precedent_an(mois: str) -> str:
@@ -212,8 +271,9 @@ def main() -> int:
     print("Récupération IMF/PCPS (prix des matières premières)…")
     try:
         produits, brut_prix = recuperer_prix()
-        print(f"Récupération IMF/WEO:{EDITION_WEO} (projections)…")
-        projections, brut_weo = recuperer_projections()
+        edition = derniere_edition()
+        print(f"Récupération IMF.RES/{flux_weo(edition)} (projections, API du FMI)…")
+        projections, maj_pays, brut_weo = recuperer_projections(edition)
         print("Récupération IMF/CPI (indices des prix mensuels)…")
         inflation, brut_cpi = recuperer_inflation(args.dest / "portail.json")
     except ErreurControle as exc:
@@ -231,11 +291,13 @@ def main() -> int:
             "produits": [{k: v for k, v in p.items() if k != "code"} for p in produits],
         },
         "projections": {
-            "source": f"FMI, Perspectives de l'économie mondiale (WEO), édition {EDITION_WEO}, via DBnomics",
-            "edition": EDITION_WEO,
-            "premiere_annee": PREMIERE_ANNEE_PROJECTION,
-            "derniere_annee": DERNIERE_ANNEE_PROJECTION,
-            "indicateurs": [{"id": p["id"], "unite": p["unite"], "serie": f"IMF/WEO:{EDITION_WEO}/<ISO>.{p['code']}.{p['unite_weo']}"} for p in PROJECTIONS],
+            "source": f"FMI, Perspectives de l'économie mondiale (WEO), édition {edition}, API SDMX du FMI",
+            "edition": edition,
+            "flux": f"IMF.RES/{flux_weo(edition)}",
+            "mise_a_jour_pays": maj_pays,
+            "premiere_annee": int(edition[:4]),
+            "derniere_annee": int(edition[:4]) + 5,
+            "indicateurs": [{"id": p["id"], "unite": p["unite"], "serie": f"IMF.RES/{flux_weo(edition)}/<ISO>.{p['code']}.A"} for p in PROJECTIONS],
             "series": projections,
         },
         "inflation_mensuelle": {
@@ -250,7 +312,7 @@ def main() -> int:
     for p in produits:
         print(f"  {p['id']:<9} {p['points'][0][0]} → {p['points'][-1][0]}  dernier : {p['points'][-1][1]} {p['unite']}")
     nb = sum(len(v) for s in projections.values() for v in s.values())
-    print(f"  projections : {len(projections)} indicateurs, {nb} valeurs ({PREMIERE_ANNEE_PROJECTION}–{DERNIERE_ANNEE_PROJECTION})")
+    print(f"  projections : édition {edition}, {len(projections)} indicateurs, {nb} valeurs")
     for zone, p in inflation.items():
         print(f"  inflation {zone:<14} dernier mois {p['dernier_mois']} : {p['points'][-1][1]} % ; concordance {[(c['annee'], c['ecart']) for c in p['concordance']]}")
 

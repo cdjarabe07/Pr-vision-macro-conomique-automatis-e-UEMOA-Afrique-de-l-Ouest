@@ -1,5 +1,157 @@
 [
   {
+    "id": "donnees-fmi-cpi:2026-10-09T18:00:13Z",
+    "type": "donnees",
+    "date": "2026-10-09T18:00:13Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "inflation_mensuelle"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "fournisseur": "FMI, Consumer Price Index (CPI), via DBnomics",
+      "jeu": "cpi",
+      "dernier_mois": "2025-06"
+    }
+  },
+  {
+    "id": "donnees-fmi-pcps:2026-10-09T18:00:13Z",
+    "type": "donnees",
+    "date": "2026-10-09T18:00:13Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "petrole",
+      "cacao",
+      "coton",
+      "or",
+      "uranium",
+      "arachide",
+      "riz",
+      "ble"
+    ],
+    "zones": [],
+    "details": {
+      "fournisseur": "FMI, Primary Commodity Price System (PCPS), via DBnomics",
+      "jeu": "pcps",
+      "dernier_mois": "2025-06"
+    }
+  },
+  {
+    "id": "donnees-fmi-weo:2026-10-09T18:00:13Z",
+    "type": "donnees",
+    "date": "2026-10-09T18:00:13Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "croissance_reelle",
+      "inflation",
+      "dette_apu",
+      "solde_apu",
+      "balance_courante"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "fournisseur": "FMI, Perspectives de l'économie mondiale (WEO), édition 2026-04, API SDMX du FMI",
+      "jeu": "weo",
+      "edition": "2026-04",
+      "premiere_annee": 2026,
+      "derniere_annee": 2031
+    }
+  },
+  {
+    "id": "donnees-fmi-cpi:2026-10-09T17:56:12Z",
+    "type": "donnees",
+    "date": "2026-10-09T17:56:12Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "inflation_mensuelle"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "fournisseur": "FMI, Consumer Price Index (CPI), via DBnomics",
+      "jeu": "cpi",
+      "dernier_mois": "2025-06"
+    }
+  },
+  {
+    "id": "donnees-fmi-pcps:2026-10-09T17:56:12Z",
+    "type": "donnees",
+    "date": "2026-10-09T17:56:12Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "petrole",
+      "cacao",
+      "coton",
+      "or",
+      "uranium",
+      "arachide",
+      "riz",
+      "ble"
+    ],
+    "zones": [],
+    "details": {
+      "fournisseur": "FMI, Primary Commodity Price System (PCPS), via DBnomics",
+      "jeu": "pcps",
+      "dernier_mois": "2025-06"
+    }
+  },
+  {
+    "id": "donnees-fmi-weo:2026-10-09T17:56:12Z",
+    "type": "donnees",
+    "date": "2026-10-09T17:56:12Z",
+    "source": "export_fmi.py",
+    "indicateurs": [
+      "croissance_reelle",
+      "inflation",
+      "dette_apu",
+      "solde_apu",
+      "balance_courante"
+    ],
+    "zones": [
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "details": {
+      "fournisseur": "FMI, Perspectives de l'économie mondiale (WEO), édition 2026-04, API SDMX du FMI",
+      "jeu": "weo",
+      "edition": "2026-04",
+      "premiere_annee": 2026,
+      "derniere_annee": 2031
+    }
+  },
+  {
     "id": "donnees-bm:2026-10-09T17:13:44Z",
     "type": "donnees",
     "date": "2026-10-09T17:13:44Z",

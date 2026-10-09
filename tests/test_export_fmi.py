@@ -50,5 +50,27 @@ class TestInflationMensuelle(unittest.TestCase):
         self.assertEqual([c["annee"] for c in E.concordance(indice, {2023: 3.0, 2024: 3.0})], [2023])
 
 
+class TestProjectionsWEO(unittest.TestCase):
+    def test_nom_du_jeu_date(self):
+        self.assertEqual(E.flux_weo("2026-04"), "WEO_2026_APR_VINTAGE")
+        self.assertEqual(E.flux_weo("2025-10"), "WEO_2025_OCT_VINTAGE")
+
+    def test_edition_la_plus_recente(self):
+        liste = ('<str:Dataflow id="WEO_2026_APR_VINTAGE"/><str:Dataflow id="WEO"/>'
+                 '<str:Dataflow id="WEO_2025_OCT_VINTAGE"/><str:Dataflow id="AFRREO_2025_OCT_VINTAGE"/>')
+        self.assertEqual(E.editions_dans(liste), ["2025-10", "2026-04"])
+
+    def test_lecture_sdmx(self):
+        xml = (
+            '<?xml version="1.0"?><m:StructureSpecificData xmlns:m="urn:m"><m:DataSet>'
+            '<Series COUNTRY="SEN" INDICATOR="NGDP_RPCH" COUNTRY_UPDATE_DATE="3/24/2026">'
+            '<Obs TIME_PERIOD="2026" OBS_VALUE="2.17"/><Obs TIME_PERIOD="2027" OBS_VALUE="2.28"/></Series>'
+            "</m:DataSet></m:StructureSpecificData>"
+        )
+        [(attrs, obs)] = E.lire_sdmx(xml)
+        self.assertEqual(attrs["COUNTRY"], "SEN")
+        self.assertEqual(obs, [("2026", "2.17"), ("2027", "2.28")])
+
+
 if __name__ == "__main__":
     unittest.main()
